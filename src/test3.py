@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 #region Description
 __author__ = 'Tamnd - NGUYEN DUC TAM'
@@ -17,11 +17,31 @@ import datetime
 import json
 import logging
 import os, sys, inspect
-src_dir = os.path.dirname(inspect.getfile(inspect.currentframe()))
-arch_dir = '../lib/x64' if sys.maxsize > 2**32 else '../lib/x86'
-sys.path.insert(0, os.path.abspath(os.path.join(src_dir, arch_dir)))
 
-import Leap3
+#
+# # SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)) + "/../lib/x64"
+# SCRIPT_DIR = str(Path(__file__).resolve(strict=True).parent.parent) + "/lib/x64"
+# print(f"SCRIPT_DIR = {SCRIPT_DIR}")
+# sys.path.append(os.path.dirname(SCRIPT_DIR))
+from sys import version_info
+print(version_info)
+if version_info < (2, 7, 0):
+    raise RuntimeError("Python 2.7 or later required")
+elif version_info < (3, 0, 0):
+    src_dir = os.path.dirname(inspect.getfile(inspect.currentframe()))
+    arch_dir = '../lib/x64' if sys.maxsize > 2 ** 32 else '../lib/x86'
+    sys.path.insert(0, os.path.abspath(os.path.join(src_dir, arch_dir)))
+
+    import Leap
+
+else:
+    print("version_info = %s" % str(version_info))
+    from pathlib import Path
+
+    src_dir = os.path.dirname(inspect.getfile(inspect.currentframe()))
+    arch_dir = '../lib/x64' if sys.maxsize > 2 ** 32 else '../lib/x86'
+    sys.path.insert(0, os.path.abspath(os.path.join(src_dir, arch_dir)))
+    import Leap3
 
 class SampleListener(Leap3.Listener):
 

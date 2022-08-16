@@ -5,47 +5,19 @@
 # the SWIG interface file instead.
 
 from sys import version_info as _swig_python_version_info
-
 if _swig_python_version_info < (2, 7, 0):
     raise RuntimeError("Python 2.7 or later required")
 
 # Import the low-level C/C++ module
-# if __package__ or "." in __name__:
-#     from . import LeapPython3
-# else:
-#     import LeapPython3
+if __package__ or "." in __name__:
+    from . import LeapPython3
+else:
+    import LeapPython3
 
-import sys
-import os
-#
-# SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-# sys.path.append(os.path.dirname(SCRIPT_DIR))
-
-import importlib
-from importlib.machinery import FileFinder, ExtensionFileLoader
-
-# pick right loader for .dylib-files:
-dylib_extension = ExtensionFileLoader, ['.dylib']
-
-# add dylib-support to file-extension supported per default
-# all_supported_loaders = [dylib_extension]+ importlib._bootstrap_external._get_supported_file_loaders()
-
-
-# replace the last hook (i.e. FileFinder) with one recognizing `.dylib` as well:
-# sys.path_hooks.pop()
-# sys.path_hooks.append(FileFinder.path_hook(*all_supported_loaders))
-
-sys.path.insert(0, os.path.abspath("/Users/apple/Tnd-Projects/Leap-Python3/lib/x64"))
-# import imp
-# imp.load_dynamic('LeapPython3', '/Users/apple/Tnd-Projects/Leap-Python3/lib/x64/LeapPython3.dylib') # or what ever path is used
-#
-import LeapPython3
-# from . import LeapPython3
 try:
     import builtins as __builtin__
 except ImportError:
     import __builtin__
-
 
 def _swig_repr(self):
     try:
@@ -65,7 +37,6 @@ def _swig_setattr_nondynamic_instance_variable(set):
             set(self, name, value)
         else:
             raise AttributeError("You cannot add instance attributes to %s" % self)
-
     return set_instance_attr
 
 
@@ -75,16 +46,13 @@ def _swig_setattr_nondynamic_class_variable(set):
             set(cls, name, value)
         else:
             raise AttributeError("You cannot add class attributes to %s" % cls)
-
     return set_class_attr
 
 
 def _swig_add_metaclass(metaclass):
     """Class decorator for adding a metaclass to a SWIG wrapped class - a slimmed down version of six.add_metaclass"""
-
     def wrapper(cls):
         return metaclass(cls.__name__, cls.__bases__, cls.__dict__.copy())
-
     return wrapper
 
 
@@ -95,13 +63,11 @@ class _SwigNonDynamicMeta(type):
 
 import weakref
 
-
 class SwigPyIterator(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
-
     __repr__ = _swig_repr
     __swig_destroy__ = LeapPython3.delete_SwigPyIterator
 
@@ -152,14 +118,11 @@ class SwigPyIterator(object):
 
     def __sub__(self, *args):
         return LeapPython3.SwigPyIterator___sub__(self, *args)
-
     def __iter__(self):
         return self
 
-
 # Register SwigPyIterator in LeapPython3:
 LeapPython3.SwigPyIterator_swigregister(SwigPyIterator)
-
 
 class byte_array(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -167,7 +130,6 @@ class byte_array(object):
 
     def __init__(self, nelements):
         LeapPython3.byte_array_swiginit(self, LeapPython3.new_byte_array(nelements))
-
     __swig_destroy__ = LeapPython3.delete_byte_array
 
     def __getitem__(self, index):
@@ -183,14 +145,11 @@ class byte_array(object):
     def frompointer(t):
         return LeapPython3.byte_array_frompointer(t)
 
-
 # Register byte_array in LeapPython3:
 LeapPython3.byte_array_swigregister(byte_array)
 
-
 def byte_array_frompointer(t):
     return LeapPython3.byte_array_frompointer(t)
-
 
 class float_array(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -198,7 +157,6 @@ class float_array(object):
 
     def __init__(self, nelements):
         LeapPython3.float_array_swiginit(self, LeapPython3.new_float_array(nelements))
-
     __swig_destroy__ = LeapPython3.delete_float_array
 
     def __getitem__(self, index):
@@ -214,14 +172,11 @@ class float_array(object):
     def frompointer(t):
         return LeapPython3.float_array_frompointer(t)
 
-
 # Register float_array in LeapPython3:
 LeapPython3.float_array_swigregister(float_array)
 
-
 def float_array_frompointer(t):
     return LeapPython3.float_array_frompointer(t)
-
 
 class Vector(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -256,8 +211,9 @@ class Vector(object):
 
     def __truediv__(self, *args):
         return LeapPython3.Vector___truediv__(self, *args)
-
     __div__ = __truediv__
+
+
 
     def __iadd__(self, other):
         return LeapPython3.Vector___iadd__(self, other)
@@ -270,8 +226,9 @@ class Vector(object):
 
     def __itruediv__(self, *args):
         return LeapPython3.Vector___itruediv__(self, *args)
-
     __idiv__ = __itruediv__
+
+
 
     def __str__(self):
         return LeapPython3.Vector___str__(self)
@@ -287,7 +244,6 @@ class Vector(object):
 
     def __getitem__(self, index):
         return LeapPython3.Vector___getitem__(self, index)
-
     x = property(LeapPython3.Vector_x_get, LeapPython3.Vector_x_set)
     y = property(LeapPython3.Vector_y_get, LeapPython3.Vector_y_set)
     z = property(LeapPython3.Vector_z_get, LeapPython3.Vector_z_set)
@@ -299,11 +255,9 @@ class Vector(object):
     normalized = property(LeapPython3.Vector_normalized_get)
 
     def to_float_array(self): return [self.x, self.y, self.z]
-
     def to_tuple(self): return (self.x, self.y, self.z)
 
     __swig_destroy__ = LeapPython3.delete_Vector
-
 
 # Register Vector in LeapPython3:
 LeapPython3.Vector_swigregister(Vector)
@@ -322,7 +276,6 @@ Vector.left = LeapPython3.cvar.Vector_left
 Vector.right = LeapPython3.cvar.Vector_right
 Vector.up = LeapPython3.cvar.Vector_up
 Vector.down = LeapPython3.cvar.Vector_down
-
 
 class Matrix(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -357,49 +310,42 @@ class Matrix(object):
 
     def __str__(self):
         return LeapPython3.Matrix___str__(self)
-
     x_basis = property(LeapPython3.Matrix_x_basis_get, LeapPython3.Matrix_x_basis_set)
     y_basis = property(LeapPython3.Matrix_y_basis_get, LeapPython3.Matrix_y_basis_set)
     z_basis = property(LeapPython3.Matrix_z_basis_get, LeapPython3.Matrix_z_basis_set)
     origin = property(LeapPython3.Matrix_origin_get, LeapPython3.Matrix_origin_set)
 
-    def to_array_3x3(self, output=None):
-        if output is None:
-            output = [0] * 9
-        output[0], output[1], output[2] = self.x_basis.x, self.x_basis.y, self.x_basis.z
-        output[3], output[4], output[5] = self.y_basis.x, self.y_basis.y, self.y_basis.z
-        output[6], output[7], output[8] = self.z_basis.x, self.z_basis.y, self.z_basis.z
-        return output
-
-    def to_array_4x4(self, output=None):
-        if output is None:
-            output = [0] * 16
-        output[0], output[1], output[2], output[3] = self.x_basis.x, self.x_basis.y, self.x_basis.z, 0.0
-        output[4], output[5], output[6], output[7] = self.y_basis.x, self.y_basis.y, self.y_basis.z, 0.0
-        output[8], output[9], output[10], output[11] = self.z_basis.x, self.z_basis.y, self.z_basis.z, 0.0
-        output[12], output[13], output[14], output[15] = self.origin.x, self.origin.y, self.origin.z, 1.0
-        return output
+    def to_array_3x3(self, output = None):
+      if output is None:
+          output = [0]*9
+      output[0], output[1], output[2] = self.x_basis.x, self.x_basis.y, self.x_basis.z
+      output[3], output[4], output[5] = self.y_basis.x, self.y_basis.y, self.y_basis.z
+      output[6], output[7], output[8] = self.z_basis.x, self.z_basis.y, self.z_basis.z
+      return output
+    def to_array_4x4(self, output = None):
+      if output is None:
+          output = [0]*16
+      output[0],  output[1],  output[2],  output[3]  = self.x_basis.x, self.x_basis.y, self.x_basis.z, 0.0
+      output[4],  output[5],  output[6],  output[7]  = self.y_basis.x, self.y_basis.y, self.y_basis.z, 0.0
+      output[8],  output[9],  output[10], output[11] = self.z_basis.x, self.z_basis.y, self.z_basis.z, 0.0
+      output[12], output[13], output[14], output[15] = self.origin.x,  self.origin.y,  self.origin.z,  1.0
+      return output
 
     __swig_destroy__ = LeapPython3.delete_Matrix
-
 
 # Register Matrix in LeapPython3:
 LeapPython3.Matrix_swigregister(Matrix)
 Matrix.identity = LeapPython3.cvar.Matrix_identity
-
 
 class Interface(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined")
-
     __repr__ = _swig_repr
-
 
 # Register Interface in LeapPython3:
 LeapPython3.Interface_swigregister(Interface)
-
 
 class Pointable(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -419,7 +365,6 @@ class Pointable(Interface):
 
     def __str__(self):
         return LeapPython3.Pointable___str__(self)
-
     id = property(LeapPython3.Pointable_id_get)
     hand = property(LeapPython3.Pointable_hand_get)
     tip_position = property(LeapPython3.Pointable_tip_position_get)
@@ -438,11 +383,9 @@ class Pointable(Interface):
     frame = property(LeapPython3.Pointable_frame_get)
     __swig_destroy__ = LeapPython3.delete_Pointable
 
-
 # Register Pointable in LeapPython3:
 LeapPython3.Pointable_swigregister(Pointable)
 Pointable.invalid = LeapPython3.cvar.Pointable_invalid
-
 
 class Arm(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -459,7 +402,6 @@ class Arm(Interface):
 
     def __str__(self):
         return LeapPython3.Arm___str__(self)
-
     width = property(LeapPython3.Arm_width_get)
     center = property(LeapPython3.Arm_center_get)
     direction = property(LeapPython3.Arm_direction_get)
@@ -469,11 +411,9 @@ class Arm(Interface):
     is_valid = property(LeapPython3.Arm_is_valid_get)
     __swig_destroy__ = LeapPython3.delete_Arm
 
-
 # Register Arm in LeapPython3:
 LeapPython3.Arm_swigregister(Arm)
 Arm.invalid = LeapPython3.cvar.Arm_invalid
-
 
 class Bone(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -494,7 +434,6 @@ class Bone(Interface):
 
     def __str__(self):
         return LeapPython3.Bone___str__(self)
-
     prev_joint = property(LeapPython3.Bone_prev_joint_get)
     next_joint = property(LeapPython3.Bone_next_joint_get)
     center = property(LeapPython3.Bone_center_get)
@@ -506,11 +445,9 @@ class Bone(Interface):
     is_valid = property(LeapPython3.Bone_is_valid_get)
     __swig_destroy__ = LeapPython3.delete_Bone
 
-
 # Register Bone in LeapPython3:
 LeapPython3.Bone_swigregister(Bone)
 Bone.invalid = LeapPython3.cvar.Bone_invalid
-
 
 class Finger(Pointable):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -536,15 +473,12 @@ class Finger(Pointable):
 
     def __str__(self):
         return LeapPython3.Finger___str__(self)
-
     type = property(LeapPython3.Finger_type_get)
     __swig_destroy__ = LeapPython3.delete_Finger
-
 
 # Register Finger in LeapPython3:
 LeapPython3.Finger_swigregister(Finger)
 Finger.invalid = LeapPython3.cvar.Finger_invalid
-
 
 class Tool(Pointable):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -555,14 +489,11 @@ class Tool(Pointable):
 
     def __str__(self):
         return LeapPython3.Tool___str__(self)
-
     __swig_destroy__ = LeapPython3.delete_Tool
-
 
 # Register Tool in LeapPython3:
 LeapPython3.Tool_swigregister(Tool)
 Tool.invalid = LeapPython3.cvar.Tool_invalid
-
 
 class Hand(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -612,7 +543,6 @@ class Hand(Interface):
 
     def __str__(self):
         return LeapPython3.Hand___str__(self)
-
     id = property(LeapPython3.Hand_id_get)
     pointables = property(LeapPython3.Hand_pointables_get)
     fingers = property(LeapPython3.Hand_fingers_get)
@@ -638,11 +568,9 @@ class Hand(Interface):
     arm = property(LeapPython3.Hand_arm_get)
     __swig_destroy__ = LeapPython3.delete_Hand
 
-
 # Register Hand in LeapPython3:
 LeapPython3.Hand_swigregister(Hand)
 Hand.invalid = LeapPython3.cvar.Hand_invalid
-
 
 class Gesture(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -668,7 +596,6 @@ class Gesture(Interface):
 
     def __str__(self):
         return LeapPython3.Gesture___str__(self)
-
     type = property(LeapPython3.Gesture_type_get)
     state = property(LeapPython3.Gesture_state_get)
     id = property(LeapPython3.Gesture_id_get)
@@ -680,11 +607,9 @@ class Gesture(Interface):
     is_valid = property(LeapPython3.Gesture_is_valid_get)
     __swig_destroy__ = LeapPython3.delete_Gesture
 
-
 # Register Gesture in LeapPython3:
 LeapPython3.Gesture_swigregister(Gesture)
 Gesture.invalid = LeapPython3.cvar.Gesture_invalid
-
 
 class SwipeGesture(Gesture):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -696,7 +621,6 @@ class SwipeGesture(Gesture):
 
     def __init__(self, *args):
         LeapPython3.SwipeGesture_swiginit(self, LeapPython3.new_SwipeGesture(*args))
-
     start_position = property(LeapPython3.SwipeGesture_start_position_get)
     position = property(LeapPython3.SwipeGesture_position_get)
     direction = property(LeapPython3.SwipeGesture_direction_get)
@@ -704,14 +628,11 @@ class SwipeGesture(Gesture):
     pointable = property(LeapPython3.SwipeGesture_pointable_get)
     __swig_destroy__ = LeapPython3.delete_SwipeGesture
 
-
 # Register SwipeGesture in LeapPython3:
 LeapPython3.SwipeGesture_swigregister(SwipeGesture)
 
-
 def SwipeGesture_class_type():
     return LeapPython3.SwipeGesture_class_type()
-
 
 class CircleGesture(Gesture):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -723,7 +644,6 @@ class CircleGesture(Gesture):
 
     def __init__(self, *args):
         LeapPython3.CircleGesture_swiginit(self, LeapPython3.new_CircleGesture(*args))
-
     center = property(LeapPython3.CircleGesture_center_get)
     normal = property(LeapPython3.CircleGesture_normal_get)
     progress = property(LeapPython3.CircleGesture_progress_get)
@@ -731,14 +651,11 @@ class CircleGesture(Gesture):
     pointable = property(LeapPython3.CircleGesture_pointable_get)
     __swig_destroy__ = LeapPython3.delete_CircleGesture
 
-
 # Register CircleGesture in LeapPython3:
 LeapPython3.CircleGesture_swigregister(CircleGesture)
 
-
 def CircleGesture_class_type():
     return LeapPython3.CircleGesture_class_type()
-
 
 class ScreenTapGesture(Gesture):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -750,21 +667,17 @@ class ScreenTapGesture(Gesture):
 
     def __init__(self, *args):
         LeapPython3.ScreenTapGesture_swiginit(self, LeapPython3.new_ScreenTapGesture(*args))
-
     position = property(LeapPython3.ScreenTapGesture_position_get)
     direction = property(LeapPython3.ScreenTapGesture_direction_get)
     progress = property(LeapPython3.ScreenTapGesture_progress_get)
     pointable = property(LeapPython3.ScreenTapGesture_pointable_get)
     __swig_destroy__ = LeapPython3.delete_ScreenTapGesture
 
-
 # Register ScreenTapGesture in LeapPython3:
 LeapPython3.ScreenTapGesture_swigregister(ScreenTapGesture)
 
-
 def ScreenTapGesture_class_type():
     return LeapPython3.ScreenTapGesture_class_type()
-
 
 class KeyTapGesture(Gesture):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -776,21 +689,17 @@ class KeyTapGesture(Gesture):
 
     def __init__(self, *args):
         LeapPython3.KeyTapGesture_swiginit(self, LeapPython3.new_KeyTapGesture(*args))
-
     position = property(LeapPython3.KeyTapGesture_position_get)
     direction = property(LeapPython3.KeyTapGesture_direction_get)
     progress = property(LeapPython3.KeyTapGesture_progress_get)
     pointable = property(LeapPython3.KeyTapGesture_pointable_get)
     __swig_destroy__ = LeapPython3.delete_KeyTapGesture
 
-
 # Register KeyTapGesture in LeapPython3:
 LeapPython3.KeyTapGesture_swigregister(KeyTapGesture)
 
-
 def KeyTapGesture_class_type():
     return LeapPython3.KeyTapGesture_class_type()
-
 
 class Screen(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -819,7 +728,6 @@ class Screen(Interface):
 
     def __str__(self):
         return LeapPython3.Screen___str__(self)
-
     id = property(LeapPython3.Screen_id_get)
     horizontal_axis = property(LeapPython3.Screen_horizontal_axis_get)
     vertical_axis = property(LeapPython3.Screen_vertical_axis_get)
@@ -829,11 +737,9 @@ class Screen(Interface):
     is_valid = property(LeapPython3.Screen_is_valid_get)
     __swig_destroy__ = LeapPython3.delete_Screen
 
-
 # Register Screen in LeapPython3:
 LeapPython3.Screen_swigregister(Screen)
 Screen.invalid = LeapPython3.cvar.Screen_invalid
-
 
 class Device(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -856,7 +762,6 @@ class Device(Interface):
 
     def __str__(self):
         return LeapPython3.Device___str__(self)
-
     horizontal_view_angle = property(LeapPython3.Device_horizontal_view_angle_get)
     vertical_view_angle = property(LeapPython3.Device_vertical_view_angle_get)
     range = property(LeapPython3.Device_range_get)
@@ -871,11 +776,9 @@ class Device(Interface):
     orientation = property(LeapPython3.Device_orientation_get)
     __swig_destroy__ = LeapPython3.delete_Device
 
-
 # Register Device in LeapPython3:
 LeapPython3.Device_swigregister(Device)
 Device.invalid = LeapPython3.cvar.Device_invalid
-
 
 class Image(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -889,7 +792,6 @@ class Image(Interface):
 
     def distortion(self, dst):
         return LeapPython3.Image_distortion(self, dst)
-
     INFRARED = LeapPython3.Image_INFRARED
 
     def rectify(self, uv):
@@ -906,7 +808,6 @@ class Image(Interface):
 
     def __str__(self):
         return LeapPython3.Image___str__(self)
-
     sequence_id = property(LeapPython3.Image_sequence_id_get)
     id = property(LeapPython3.Image_id_get)
     width = property(LeapPython3.Image_width_get)
@@ -923,29 +824,25 @@ class Image(Interface):
     is_valid = property(LeapPython3.Image_is_valid_get)
 
     def data(self):
-        ptr = byte_array(self.width * self.height * self.bytes_per_pixel)
-        LeapPython3.Image_data(self, ptr)
-        return ptr
-
+      ptr = byte_array(self.width * self.height * self.bytes_per_pixel)
+      LeapPython3.Image_data(self, ptr)
+      return ptr
     def distortion(self):
-        ptr = float_array(self.distortion_width * self.distortion_height)
-        LeapPython3.Image_distortion(self, ptr)
-        return ptr
-
+      ptr = float_array(self.distortion_width * self.distortion_height)
+      LeapPython3.Image_distortion(self, ptr)
+      return ptr
     __swig_getmethods__["data"] = data
-    if _newclass: data = _swig_property(data)
+    if _newclass:data = _swig_property(data)
     __swig_getmethods__["distortion"] = distortion
-    if _newclass: distortion = _swig_property(distortion)
+    if _newclass:distortion = _swig_property(distortion)
 
     data_pointer = property(LeapPython3.Image_data_pointer_get)
     distortion_pointer = property(LeapPython3.Image_distortion_pointer_get)
     __swig_destroy__ = LeapPython3.delete_Image
 
-
 # Register Image in LeapPython3:
 LeapPython3.Image_swigregister(Image)
 Image.invalid = LeapPython3.cvar.Image_invalid
-
 
 class Mask(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -969,7 +866,6 @@ class Mask(Interface):
 
     def __str__(self):
         return LeapPython3.Mask___str__(self)
-
     sequence_id = property(LeapPython3.Mask_sequence_id_get)
     id = property(LeapPython3.Mask_id_get)
     width = property(LeapPython3.Mask_width_get)
@@ -979,24 +875,20 @@ class Mask(Interface):
     is_valid = property(LeapPython3.Mask_is_valid_get)
 
     def data(self):
-        ptr = byte_array(self.width * self.height)
-        LeapPython3.Mask_data(self, ptr)
-        return ptr
-
+      ptr = byte_array(self.width * self.height)
+      LeapPython3.Mask_data(self, ptr)
+      return ptr
     __swig_getmethods__["data"] = data
-    if _newclass: data = _swig_property(data)
+    if _newclass:data = _swig_property(data)
 
     data_pointer = property(LeapPython3.Mask_data_pointer_get)
     __swig_destroy__ = LeapPython3.delete_Mask
 
-
 # Register Mask in LeapPython3:
 LeapPython3.Mask_swigregister(Mask)
 
-
 def Mask_invalid():
     return LeapPython3.Mask_invalid()
-
 
 class PointableList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1016,24 +908,21 @@ class PointableList(Interface):
 
     def extended(self):
         return LeapPython3.PointableList_extended(self)
-
     is_empty = property(LeapPython3.PointableList_is_empty_get)
     leftmost = property(LeapPython3.PointableList_leftmost_get)
     rightmost = property(LeapPython3.PointableList_rightmost_get)
     frontmost = property(LeapPython3.PointableList_frontmost_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_PointableList
 
-
 # Register PointableList in LeapPython3:
 LeapPython3.PointableList_swigregister(PointableList)
-
 
 class FingerList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1056,24 +945,21 @@ class FingerList(Interface):
 
     def finger_type(self, type):
         return LeapPython3.FingerList_finger_type(self, type)
-
     is_empty = property(LeapPython3.FingerList_is_empty_get)
     leftmost = property(LeapPython3.FingerList_leftmost_get)
     rightmost = property(LeapPython3.FingerList_rightmost_get)
     frontmost = property(LeapPython3.FingerList_frontmost_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_FingerList
 
-
 # Register FingerList in LeapPython3:
 LeapPython3.FingerList_swigregister(FingerList)
-
 
 class ToolList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1090,24 +976,21 @@ class ToolList(Interface):
 
     def append(self, other):
         return LeapPython3.ToolList_append(self, other)
-
     is_empty = property(LeapPython3.ToolList_is_empty_get)
     leftmost = property(LeapPython3.ToolList_leftmost_get)
     rightmost = property(LeapPython3.ToolList_rightmost_get)
     frontmost = property(LeapPython3.ToolList_frontmost_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_ToolList
 
-
 # Register ToolList in LeapPython3:
 LeapPython3.ToolList_swigregister(ToolList)
-
 
 class HandList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1124,24 +1007,21 @@ class HandList(Interface):
 
     def append(self, other):
         return LeapPython3.HandList_append(self, other)
-
     is_empty = property(LeapPython3.HandList_is_empty_get)
     leftmost = property(LeapPython3.HandList_leftmost_get)
     rightmost = property(LeapPython3.HandList_rightmost_get)
     frontmost = property(LeapPython3.HandList_frontmost_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_HandList
 
-
 # Register HandList in LeapPython3:
 LeapPython3.HandList_swigregister(HandList)
-
 
 class GestureList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1158,21 +1038,18 @@ class GestureList(Interface):
 
     def append(self, other):
         return LeapPython3.GestureList_append(self, other)
-
     is_empty = property(LeapPython3.GestureList_is_empty_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_GestureList
 
-
 # Register GestureList in LeapPython3:
 LeapPython3.GestureList_swigregister(GestureList)
-
 
 class ScreenList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1192,21 +1069,18 @@ class ScreenList(Interface):
 
     def closest_screen(self, position):
         return LeapPython3.ScreenList_closest_screen(self, position)
-
     is_empty = property(LeapPython3.ScreenList_is_empty_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_ScreenList
 
-
 # Register ScreenList in LeapPython3:
 LeapPython3.ScreenList_swigregister(ScreenList)
-
 
 class DeviceList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1223,21 +1097,18 @@ class DeviceList(Interface):
 
     def append(self, other):
         return LeapPython3.DeviceList_append(self, other)
-
     is_empty = property(LeapPython3.DeviceList_is_empty_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_DeviceList
 
-
 # Register DeviceList in LeapPython3:
 LeapPython3.DeviceList_swigregister(DeviceList)
-
 
 class ImageList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1254,21 +1125,18 @@ class ImageList(Interface):
 
     def append(self, other):
         return LeapPython3.ImageList_append(self, other)
-
     is_empty = property(LeapPython3.ImageList_is_empty_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_ImageList
 
-
 # Register ImageList in LeapPython3:
 LeapPython3.ImageList_swigregister(ImageList)
-
 
 class TrackedQuad(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1285,7 +1153,6 @@ class TrackedQuad(Interface):
 
     def __str__(self):
         return LeapPython3.TrackedQuad___str__(self)
-
     width = property(LeapPython3.TrackedQuad_width_get)
     height = property(LeapPython3.TrackedQuad_height_get)
     resolution_x = property(LeapPython3.TrackedQuad_resolution_x_get)
@@ -1298,11 +1165,9 @@ class TrackedQuad(Interface):
     is_valid = property(LeapPython3.TrackedQuad_is_valid_get)
     __swig_destroy__ = LeapPython3.delete_TrackedQuad
 
-
 # Register TrackedQuad in LeapPython3:
 LeapPython3.TrackedQuad_swigregister(TrackedQuad)
 TrackedQuad.invalid = LeapPython3.cvar.TrackedQuad_invalid
-
 
 class MaskList(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1319,21 +1184,18 @@ class MaskList(Interface):
 
     def append(self, other):
         return LeapPython3.MaskList_append(self, other)
-
     is_empty = property(LeapPython3.MaskList_is_empty_get)
 
     def __iter__(self):
-        _pos = 0
-        while _pos < len(self):
-            yield self[_pos]
-            _pos += 1
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
 
     __swig_destroy__ = LeapPython3.delete_MaskList
 
-
 # Register MaskList in LeapPython3:
 LeapPython3.MaskList_swigregister(MaskList)
-
 
 class InteractionBox(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1356,7 +1218,6 @@ class InteractionBox(Interface):
 
     def __str__(self):
         return LeapPython3.InteractionBox___str__(self)
-
     center = property(LeapPython3.InteractionBox_center_get)
     width = property(LeapPython3.InteractionBox_width_get)
     height = property(LeapPython3.InteractionBox_height_get)
@@ -1364,11 +1225,9 @@ class InteractionBox(Interface):
     is_valid = property(LeapPython3.InteractionBox_is_valid_get)
     __swig_destroy__ = LeapPython3.delete_InteractionBox
 
-
 # Register InteractionBox in LeapPython3:
 LeapPython3.InteractionBox_swigregister(InteractionBox)
 InteractionBox.invalid = LeapPython3.cvar.InteractionBox_invalid
-
 
 class Frame(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1433,7 +1292,6 @@ class Frame(Interface):
 
     def __str__(self):
         return LeapPython3.Frame___str__(self)
-
     id = property(LeapPython3.Frame_id_get)
     timestamp = property(LeapPython3.Frame_timestamp_get)
     current_frames_per_second = property(LeapPython3.Frame_current_frames_per_second_get)
@@ -1448,24 +1306,20 @@ class Frame(Interface):
     tracked_quad = property(LeapPython3.Frame_tracked_quad_get)
 
     def serialize(self):
-        length = self.serialize_length
-        str = byte_array(length)
-        LeapPython3.Frame_serialize(self, str)
-        return (str, length)
-
+      length = self.serialize_length
+      str = byte_array(length)
+      LeapPython3.Frame_serialize(self, str)
+      return (str, length)
     def deserialize(self, tup):
-        LeapPython3.Frame_deserialize(self, tup[0], tup[1])
-
+      LeapPython3.Frame_deserialize(self, tup[0], tup[1])
     __swig_getmethods__["serialize"] = serialize
-    if _newclass: serialize = _swig_property(serialize)
+    if _newclass:serialize = _swig_property(serialize)
 
     __swig_destroy__ = LeapPython3.delete_Frame
-
 
 # Register Frame in LeapPython3:
 LeapPython3.Frame_swigregister(Frame)
 Frame.invalid = LeapPython3.cvar.Frame_invalid
-
 
 class BugReport(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1479,16 +1333,13 @@ class BugReport(Interface):
 
     def end_recording(self):
         return LeapPython3.BugReport_end_recording(self)
-
     is_active = property(LeapPython3.BugReport_is_active_get)
     progress = property(LeapPython3.BugReport_progress_get)
     duration = property(LeapPython3.BugReport_duration_get)
     __swig_destroy__ = LeapPython3.delete_BugReport
 
-
 # Register BugReport in LeapPython3:
 LeapPython3.BugReport_swigregister(BugReport)
-
 
 class Config(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1496,48 +1347,60 @@ class Config(Interface):
 
     def __init__(self):
         LeapPython3.Config_swiginit(self, LeapPython3.new_Config())
-
     TYPE_UNKNOWN = LeapPython3.Config_TYPE_UNKNOWN
     TYPE_BOOLEAN = LeapPython3.Config_TYPE_BOOLEAN
     TYPE_INT32 = LeapPython3.Config_TYPE_INT32
     TYPE_FLOAT = LeapPython3.Config_TYPE_FLOAT
     TYPE_STRING = LeapPython3.Config_TYPE_STRING
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def save(self):
         return LeapPython3.Config_save(self)
 
     def get(self, *args):
-
-        type = LeapPython3.Config_type(self, *args)
-        if type == LeapPython3.Config_TYPE_BOOLEAN:
-            return LeapPython3.Config_get_bool(self, *args)
-        elif type == LeapPython3.Config_TYPE_INT32:
-            return LeapPython3.Config_get_int_32(self, *args)
-        elif type == LeapPython3.Config_TYPE_FLOAT:
-            return LeapPython3.Config_get_float(self, *args)
-        elif type == LeapPython3.Config_TYPE_STRING:
-            return LeapPython3.Config_get_string(self, *args)
-        return None
-
+    type = LeapPython3.Config_type(self, *args)
+    if type == LeapPython3.Config_TYPE_BOOLEAN:
+      return LeapPython3.Config_get_bool(self, *args)
+    elif type == LeapPython3.Config_TYPE_INT32:
+      return LeapPython3.Config_get_int_32(self, *args)
+    elif type == LeapPython3.Config_TYPE_FLOAT:
+      return LeapPython3.Config_get_float(self, *args)
+    elif type == LeapPython3.Config_TYPE_STRING:
+      return LeapPython3.Config_get_string(self, *args)
+    return None
     def set(self, *args):
-
-        type = LeapPython3.Config_type(self, *args[:-1])  # Do not pass value through
-        if type == LeapPython3.Config_TYPE_BOOLEAN:
-            return LeapPython3.Config_set_bool(self, *args)
-        elif type == LeapPython3.Config_TYPE_INT32:
-            return LeapPython3.Config_set_int_32(self, *args)
-        elif type == LeapPython3.Config_TYPE_FLOAT:
-            return LeapPython3.Config_set_float(self, *args)
-        elif type == LeapPython3.Config_TYPE_STRING:
-            return LeapPython3.Config_set_string(self, *args)
-        return False
+    type = LeapPython3.Config_type(self, *args[:-1])  # Do not pass value through
+    if type == LeapPython3.Config_TYPE_BOOLEAN:
+      return LeapPython3.Config_set_bool(self, *args)
+    elif type == LeapPython3.Config_TYPE_INT32:
+      return LeapPython3.Config_set_int_32(self, *args)
+    elif type == LeapPython3.Config_TYPE_FLOAT:
+      return LeapPython3.Config_set_float(self, *args)
+    elif type == LeapPython3.Config_TYPE_STRING:
+      return LeapPython3.Config_set_string(self, *args)
+    return False
 
     __swig_destroy__ = LeapPython3.delete_Config
 
-
 # Register Config in LeapPython3:
 LeapPython3.Config_swigregister(Config)
-
 
 class Controller(Interface):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1549,7 +1412,6 @@ class Controller(Interface):
 
     def is_service_connected(self):
         return LeapPython3.Controller_is_service_connected(self)
-
     POLICY_DEFAULT = LeapPython3.Controller_POLICY_DEFAULT
     POLICY_BACKGROUND_FRAMES = LeapPython3.Controller_POLICY_BACKGROUND_FRAMES
     POLICY_IMAGES = LeapPython3.Controller_POLICY_IMAGES
@@ -1584,7 +1446,6 @@ class Controller(Interface):
 
     def now(self):
         return LeapPython3.Controller_now(self)
-
     is_connected = property(LeapPython3.Controller_is_connected_get)
     has_focus = property(LeapPython3.Controller_has_focus_get)
     policy_flags = property(LeapPython3.Controller_policy_flags_get)
@@ -1595,10 +1456,8 @@ class Controller(Interface):
     tracked_quad = property(LeapPython3.Controller_tracked_quad_get)
     bug_report = property(LeapPython3.Controller_bug_report_get)
 
-
 # Register Controller in LeapPython3:
 LeapPython3.Controller_swigregister(Controller)
-
 
 class Listener(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -1610,7 +1469,6 @@ class Listener(object):
         else:
             _self = self
         LeapPython3.Listener_swiginit(self, LeapPython3.new_Listener(_self, ))
-
     __swig_destroy__ = LeapPython3.delete_Listener
 
     def on_init(self, arg0):
@@ -1645,12 +1503,13 @@ class Listener(object):
 
     def on_images(self, arg0):
         return LeapPython3.Listener_on_images(self, arg0)
-
     def __disown__(self):
         self.this.disown()
         LeapPython3.disown_Listener(self)
         return weakref.proxy(self)
 
-
 # Register Listener in LeapPython3:
 LeapPython3.Listener_swigregister(Listener)
+
+
+

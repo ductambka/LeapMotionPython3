@@ -1,0 +1,13 @@
+# @TND: Tools for Library on Macos
+
+otool -f /usr/local/lib/libsmvgrammar.0.dylib
+
+file /usr/local/lib/libsmvgrammar.0.dylib
+
+lipo -detailed_info libaspell.dylib
+
+# Change rpath:
+1. install_name_tool -change @rpath/libcurand.10.dylib
+libcurand.10.dylib /usr/local/lib/libneurongpu.0.dylib
+
+2. Set the @rpath (or add another) to the correct directory.  install_name_tool -add_rpath /usr/local/bin /usr/local/lib/libneurongpu.0.dylib
